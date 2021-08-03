@@ -1,85 +1,51 @@
+import React from 'react';
+
 import { MdAddShoppingCart } from 'react-icons/md';
+
+import api from '../../services/api';
+import { formatPrice } from '../../utils/format';
 
 import { ProductList } from './styles';
 
-export default function Home() {
-  return (
-    <ProductList>
-      <li>
-        <img
-          src="https://static.zattini.com.br/produtos/tenis-adidas-grand-court-base-feminino/05/COL-7145-205/COL-7145-205_zoom1.jpg?ts=1562004219&ims=544x"
-          alt="shox"/>
-        <strong>Tênis 10/10</strong>
-        <span>R$129,90</span>
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF"/> 3
-          </div>
+export default class Home extends React.Component {
+  state = {
+    products: [],
+  };
 
-          <span>Adicionar ao carrinho</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://static.zattini.com.br/produtos/tenis-adidas-grand-court-base-feminino/05/COL-7145-205/COL-7145-205_zoom1.jpg?ts=1562004219&ims=544x"
-          alt="shox"/>
-        <strong>Tênis 10/10</strong>
-        <span>R$129,90</span>
+  async componentDidMount() {
+    const response = await api.get('products');
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF"/> 3
-          </div>
+    const data = response.data.map(product => ({
+      ...product,
+      priceFormatted: formatPrice(product.price)
+    }));
 
-          <span>Adicionar ao carrinho</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://static.zattini.com.br/produtos/tenis-adidas-grand-court-base-feminino/05/COL-7145-205/COL-7145-205_zoom1.jpg?ts=1562004219&ims=544x"
-          alt="shox"/>
-        <strong>Tênis 10/10</strong>
-        <span>R$129,90</span>
+    this.setState({ products: data });
+  }
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF"/> 3
-          </div>
+  render() {
+    const { products } = this.state;
+    return (
+      <ProductList>
+        {products.map(product => (
+          <li key={product.id}>
+            <img
+              src={product.image}
+              alt={product.title}/>
+            <strong>{product.title}</strong>
+            <span>{product.priceFormatted}</span>
 
-          <span>Adicionar ao carrinho</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://static.zattini.com.br/produtos/tenis-adidas-grand-court-base-feminino/05/COL-7145-205/COL-7145-205_zoom1.jpg?ts=1562004219&ims=544x"
-          alt="shox"/>
-        <strong>Tênis 10/10</strong>
-        <span>R$129,90</span>
+            <button type="button">
+              <div>
+                <MdAddShoppingCart size={16} color="#FFF"/> 3
+              </div>
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF"/> 3
-          </div>
-
-          <span>Adicionar ao carrinho</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://static.zattini.com.br/produtos/tenis-adidas-grand-court-base-feminino/05/COL-7145-205/COL-7145-205_zoom1.jpg?ts=1562004219&ims=544x"
-          alt="shox"/>
-        <strong>Tênis 10/10</strong>
-        <span>R$129,90</span>
-
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF"/> 3
-          </div>
-
-          <span>Adicionar ao carrinho</span>
-        </button>
-      </li>
-    </ProductList>
-  );
+              <span>Adicionar ao carrinho</span>
+            </button>
+          </li>
+        ))}
+      </ProductList>
+    );
+  }
 }
