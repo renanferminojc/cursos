@@ -31,7 +31,7 @@ class Home extends React.Component {
     dispatch({
       type: 'ADD_TO_CART',
       product,
-    })
+    });
   };
 
   render() {
