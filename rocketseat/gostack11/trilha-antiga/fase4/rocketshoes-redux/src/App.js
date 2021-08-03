@@ -9,7 +9,7 @@ import GlobalStyle from './styles/global';
 function App() {
   return (
     <BrowserRouter>
-      <Header />
+      <Header/>
       <GlobalStyle/>
       <Routes/>
     </BrowserRouter>
