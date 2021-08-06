@@ -1,7 +1,7 @@
 import { MdRemoveCircleOutline, MdAddCircleOutline, MdDelete } from 'react-icons/all';
+import { connect } from 'react-redux';
 
 import { Container, ProductTable, Total } from './styles';
-import { connect } from 'react-redux';
 
 function Cart({ cart }) {
   return (
@@ -18,7 +18,7 @@ function Cart({ cart }) {
         </thead>
         <tbody>
         {cart.map(product => (
-          <tr>
+          <tr key={product.id}>
             <td>
               <img
                 src={product.image}
@@ -69,3 +69,10 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(Cart);
+
+/*
+ * nessa função mapStateToProps também poderiamos fazer:
+ * export default connect( state => ({
+ *  cart: state.cart
+ * }))(Cart);
+*/
