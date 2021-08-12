@@ -1,7 +1,7 @@
 export default function cart(state = [], action) {
   const productIndex = state.findIndex(p => p.id === action.product.id);
   switch (action.type) {
-    case 'ADD_TO_CART':
+    case '@cart/ADD':
       if (productIndex >= 0) {
         state[productIndex].amount++;
         return [...state];
@@ -11,7 +11,7 @@ export default function cart(state = [], action) {
           amount: 1
         }];
       }
-    case 'REMOVE_FROM_CART':
+    case '@cart/REMOVE':
       if (productIndex >= 0) {
         state.splice(productIndex, 1);
         return [...state];
