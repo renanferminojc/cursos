@@ -18,6 +18,15 @@ export default function cart(state = [], action) {
       } else {
         return state;
       }
+    case '@cart/UPDATE_AMOUNT':
+      if(action.amount <= 0) {
+        return state;
+      }
+      if(productIndex >= 0) {
+        state[productIndex].amount = Number(action.amount);
+        return [...state];
+      }
+      return [...state];
     default:
       return state;
   }

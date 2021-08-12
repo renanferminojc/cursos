@@ -11,3 +11,11 @@ export function removeFromCart(product) {
     product,
   };
 }
+
+export function updateAmount(product, amount) {
+  return { 
+    type: '@cart/UPDATE_AMOUNT',
+    product,
+    amount,
+  };
+}
