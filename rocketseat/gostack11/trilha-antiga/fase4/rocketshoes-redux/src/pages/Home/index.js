@@ -28,9 +28,9 @@ class Home extends React.Component {
   }
 
   handleAddProduct = product => {
-    const { addToCart } = this.props;
+    const { addToCartRequest } = this.props;
 
-    addToCart(product);
+    addToCartRequest(product);
   };
 
   render() {

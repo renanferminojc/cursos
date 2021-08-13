@@ -1,7 +1,7 @@
 export default function cart(state = [], action) {
   const productIndex = state.findIndex(p => p.id === action.product.id);
   switch (action.type) {
-    case '@cart/ADD':
+    case '@cart/ADD_SUCCESS':
       if (productIndex >= 0) {
         state[productIndex].amount++;
         return [...state];
